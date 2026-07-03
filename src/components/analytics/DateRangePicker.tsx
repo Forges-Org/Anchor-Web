@@ -8,6 +8,8 @@ export interface DateRange {
 	to: string; // YYYY-MM-DD
 }
 
+
+
 interface Preset {
 	label: string;
 	days: number;
@@ -23,6 +25,9 @@ const PRESETS: Preset[] = [
 function toDateStr(d: Date) {
 	return d.toISOString().slice(0, 10);
 }
+
+
+
 
 function addDays(dateStr: string, n: number) {
 	const d = new Date(dateStr);
