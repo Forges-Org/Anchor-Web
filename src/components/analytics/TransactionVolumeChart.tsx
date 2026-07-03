@@ -8,8 +8,13 @@ interface Props {
 	metric?: "count" | "volume";
 }
 
+
+
 const PADDING = { top: 20, right: 16, bottom: 40, left: 56 };
 const HEIGHT = 240;
+
+
+
 
 export function TransactionVolumeChart({ data, metric = "count" }: Props) {
 	const svgRef = useRef<SVGSVGElement>(null);
