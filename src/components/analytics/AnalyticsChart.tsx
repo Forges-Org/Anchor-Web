@@ -9,6 +9,9 @@ interface AnalyticsChartProps {
 	emptyMessage?: string;
 }
 
+
+
+
 function SparkBar({ height, label }: { height: number; label: string }) {
 	return (
 		<div className="flex flex-1 flex-col items-center gap-1.5">
