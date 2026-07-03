@@ -15,7 +15,7 @@ const HEIGHT = 240;
 
 
 
-
+// transaction
 export function TransactionVolumeChart({ data, metric = "count" }: Props) {
 	const svgRef = useRef<SVGSVGElement>(null);
 	const [tooltip, setTooltip] = useState<{
