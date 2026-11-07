@@ -1,8 +1,5 @@
 import { ReactNode } from "react";
 
-
-
-
 interface AnalyticsEmptyStateProps {
 	/** Override the default icon. */
 	icon?: ReactNode;

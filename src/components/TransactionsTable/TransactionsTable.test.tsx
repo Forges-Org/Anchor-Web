@@ -15,12 +15,13 @@ describe("TransactionsTable", () => {
 	});
 
 	it("filters transactions by address prop", () => {
-		const targetAddress = "GBZXN7PIRZGNMHGA7MUUUF4GWPY5AYPV6LY4UV2GL6VJGIQRXFDNMADI";
+		const targetAddress =
+			"GBZXN7PIRZGNMHGA7MUUUF4GWPY5AYPV6LY4UV2GL6VJGIQRXFDNMADI";
 		render(<TransactionsTable address={targetAddress} />);
-		
+
 		// The transaction from/to targetAddress should be present
 		expect(screen.getByText("250.00")).toBeInTheDocument();
-		
+
 		// Transaction not involving targetAddress should NOT be present (e.g. 50.50 amount)
 		expect(screen.queryByText("50.50")).not.toBeInTheDocument();
 	});
@@ -28,10 +29,10 @@ describe("TransactionsTable", () => {
 	it("filters by search query", async () => {
 		const user = userEvent.setup();
 		render(<TransactionsTable />);
-		
+
 		const searchInput = screen.getByPlaceholderText("Hash, address, memo…");
 		await user.type(searchInput, "payment-ref");
-		
+
 		expect(screen.getByText("250.00")).toBeInTheDocument();
 		// The 1000.00 tx doesn't have this memo
 		expect(screen.queryByText("1,000.00")).not.toBeInTheDocument();

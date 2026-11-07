@@ -56,8 +56,6 @@ export interface ChartDataPoint {
 	value: number;
 }
 
-
-
 /**
  * A single row in the TopAssetsTable.
  *

@@ -155,7 +155,8 @@ export function RecoveryFAQ({
 
 			<div className="mt-6 pt-6 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 				<p className="text-sm text-zinc-600 dark:text-zinc-400">
-					Looking for more technical details? Check out our complete recovery guide.
+					Looking for more technical details? Check out our complete recovery
+					guide.
 				</p>
 				<RecoveryDocsLink />
 			</div>

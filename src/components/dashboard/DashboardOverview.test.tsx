@@ -8,9 +8,6 @@ describe("DashboardOverview", () => {
 		expect(screen.getAllByTestId(/skeleton/i)).toBeTruthy();
 	});
 
-
-	
-
 	it("displays overview stats after loading", async () => {
 		render(<DashboardOverview />);
 
@@ -32,11 +29,11 @@ describe("DashboardOverview", () => {
 		render(<DashboardOverview />);
 
 		await waitFor(() => {
-			expect(screen.getByText('Total Wallets')).toBeInTheDocument();
-			expect(screen.getByText('Active Wallets')).toBeInTheDocument();
-			expect(screen.getByText('Total Transactions')).toBeInTheDocument();
-			expect(screen.getByText('Total Volume')).toBeInTheDocument();
-			expect(screen.getByText('API Requests Today')).toBeInTheDocument();
+			expect(screen.getByText("Total Wallets")).toBeInTheDocument();
+			expect(screen.getByText("Active Wallets")).toBeInTheDocument();
+			expect(screen.getByText("Total Transactions")).toBeInTheDocument();
+			expect(screen.getByText("Total Volume")).toBeInTheDocument();
+			expect(screen.getByText("API Requests Today")).toBeInTheDocument();
 			expect(screen.getByText("Total Wallets")).toBeInTheDocument();
 			expect(screen.getByText("Active Wallets")).toBeInTheDocument();
 			expect(screen.getByText("Total Transactions")).toBeInTheDocument();

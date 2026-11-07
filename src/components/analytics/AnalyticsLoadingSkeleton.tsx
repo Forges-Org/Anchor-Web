@@ -2,9 +2,9 @@ import { Skeleton } from "@/components/ui/Skeleton";
 
 /**
  * Skeleton placeholder for the MetricsCards grid (4 stat cards).
- * 
- * 
- * 
+ *
+ *
+ *
  */
 export function MetricsCardsSkeleton() {
 	return (

@@ -5,8 +5,6 @@ interface TopAssetsTableProps {
 }
 
 export function TopAssetsTable({ assets }: TopAssetsTableProps) {
-
-	
 	return (
 		<div className="rounded-xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
 			<div className="border-b border-zinc-200 px-6 py-4 dark:border-zinc-800">

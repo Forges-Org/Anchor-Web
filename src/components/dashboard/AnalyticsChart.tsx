@@ -3,9 +3,6 @@ export type AnalyticsPoint = {
 	value: number;
 };
 
-
-
-
 interface AnalyticsChartProps {
 	title: string;
 	description: string;

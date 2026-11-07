@@ -2,9 +2,6 @@
 
 import { Skeleton } from "@/components/ui/Skeleton";
 
-
-
-
 /**
  * AuthLoadingSkeleton
  *
