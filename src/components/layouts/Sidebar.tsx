@@ -30,13 +30,9 @@ const navigation = [
 ];
 
 function isNavItemActive(pathname: string, itemHref: string): boolean {
-	// Exact match
 	if (pathname === itemHref) return true;
-	// For the Dashboard root item, only match exact
-	if (itemHref === "/demo/dashboard") return false;
-	// For other items, match if the pathname starts with the item's href
-	// (handles nested routes like /demo/dashboard/settings/profile)
-	return pathname.startsWith(itemHref + "/") || pathname.startsWith(itemHref);
+	if (itemHref === "/dashboard") return false;
+	return pathname.startsWith(`${itemHref}/`);
 }
 
 interface SidebarProps {
@@ -49,9 +45,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 	const { user, isLoading } = useAuth();
 
 	return (
-		<>
-			{/* Mobile Sidebar */}
-			<div
+		<aside
+			id="dashboard-sidebar"
+			aria-label="Dashboard navigation"
 				className={clsx(
 					"fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-auto lg:z-auto",
 					{
@@ -65,7 +61,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 					<div className="flex h-16 items-center justify-between px-6 border-b">
 						<div className="flex items-center space-x-3">
 							<div className="h-8 w-8 rounded-lg bg-linear-to-br from-blue-500 to-purple-600" />
-							<span className="text-xl font-bold text-gray-900">Dashboard</span>
+							<span className="text-xl font-bold text-gray-900">Mux Protocol</span>
 						</div>
 
 						{/* Close button - mobile only */}
@@ -80,7 +76,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 					</div>
 
 					{/* Navigation */}
-					<nav className="flex-1 space-y-1 px-4 py-6 overflow-y-auto">
+					<nav
+						aria-label="Primary"
+						className="flex-1 space-y-1 px-4 py-6 overflow-y-auto"
+					>
 						{navigation.map((item) => {
 							const isActive = isNavItemActive(pathname, item.href);
 							return (
@@ -93,10 +92,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 											? "bg-blue-50 text-blue-700 border border-blue-200"
 											: "text-gray-700 hover:bg-gray-50 hover:text-gray-900",
 									)}
+									aria-current={isActive ? "page" : undefined}
 									onClick={() => {
-										if (window.innerWidth < 1024) {
-											onClose();
-										}
+										onClose();
 									}}
 								>
 									<item.icon
@@ -153,7 +151,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 						)}
 					</div>
 				</div>
-			</div>
-		</>
+		</aside>
 	);
 }

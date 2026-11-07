@@ -1,11 +1,9 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import {
 	type KeyboardEvent,
 	useCallback,
 	useEffect,
-	useRef,
 	useState,
 } from "react";
 import { NetworkProvider } from "@/context/NetworkContext";
@@ -17,14 +15,11 @@ interface DashboardLayoutProps {
 }
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
-	const pathname = usePathname();
-
-	return <DashboardLayoutShell key={pathname}>{children}</DashboardLayoutShell>;
+	return <DashboardLayoutShell>{children}</DashboardLayoutShell>;
 }
 
 function DashboardLayoutShell({ children }: DashboardLayoutProps) {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
-	const sidebarRef = useRef<HTMLDivElement>(null);
 
 	const closeSidebar = useCallback(() => {
 		setSidebarOpen(false);
@@ -36,14 +31,13 @@ function DashboardLayoutShell({ children }: DashboardLayoutProps) {
 
 	// Lock body scroll when sidebar is open on mobile
 	useEffect(() => {
+		const previousOverflow = document.body.style.overflow;
 		if (sidebarOpen) {
 			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "auto";
 		}
 
 		return () => {
-			document.body.style.overflow = "auto";
+			document.body.style.overflow = previousOverflow;
 		};
 	}, [sidebarOpen]);
 
@@ -91,24 +85,30 @@ function DashboardLayoutShell({ children }: DashboardLayoutProps) {
 			>
 				{/* Mobile Overlay */}
 				{sidebarOpen && (
-					<div
+					<button
+						type="button"
+						aria-label="Close navigation"
+						tabIndex={-1}
 						className="fixed inset-0 z-40 bg-black/50 lg:hidden"
 						onClick={closeSidebar}
-						aria-hidden="true"
 					/>
 				)}
 
 				{/* Sidebar */}
-				<div ref={sidebarRef}>
-					<Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
-				</div>
+				<Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
 
 				<div className="flex flex-col flex-1 min-w-0">
 					{/* TopNav */}
-					<TopNav onMenuClick={toggleSidebar} />
+					<TopNav onMenuClick={toggleSidebar} sidebarOpen={sidebarOpen} />
 
 					{/* Main */}
-					<main className="flex-1">
+					<a
+						href="#main-content"
+						className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-blue-700 focus:shadow"
+					>
+						Skip to content
+					</a>
+					<main id="main-content" className="flex-1" tabIndex={-1}>
 						<div className="py-6">
 							<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 								{children}
