@@ -81,7 +81,11 @@ const NetworkBadge = ({ network }: { network: TransactionNetwork }) => {
 
 // --- Main Component ---
 
-export default function TransactionsTable({ address }: { address?: string } = {}) {
+export default function TransactionsTable({
+	address,
+}: {
+	address?: string;
+} = {}) {
 	const [search, setSearch] = useState("");
 	const [statusFilter, setStatusFilter] = useState<"all" | TransactionStatus>(
 		"all",
@@ -180,7 +184,7 @@ export default function TransactionsTable({ address }: { address?: string } = {}
 						<input
 							type="text"
 							placeholder="Hash, address, memo…"
-						aria-label="Search transactions"
+							aria-label="Search transactions"
 							className="w-full pl-9 pr-8 py-2 bg-white border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all placeholder:text-slate-400"
 							value={search}
 							onChange={(e) => {
@@ -307,10 +311,10 @@ export default function TransactionsTable({ address }: { address?: string } = {}
 				<div className="divide-y divide-slate-100">
 					{currentData.length > 0 ? (
 						currentData.map((tx) => (
-								<div
-									key={tx.hash}
-									data-testid="tx-row"
-									className="group p-4 hover:bg-slate-50 transition-colors"
+							<div
+								key={tx.hash}
+								data-testid="tx-row"
+								className="group p-4 hover:bg-slate-50 transition-colors"
 							>
 								{/* Desktop row */}
 								<div className="hidden lg:grid grid-cols-12 gap-2 items-center">

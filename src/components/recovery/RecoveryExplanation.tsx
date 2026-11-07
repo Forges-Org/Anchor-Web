@@ -46,12 +46,12 @@ export function RecoveryExplanation() {
 								What is Invisible Wallet Recovery?
 							</h2>
 							<p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-								Invisible Wallet Recovery is an automatic system that ensures your
-								wallet remains accessible even if you lose access to your device
-								or account. Unlike traditional wallets that require seed phrases
-								or private keys, Mux&apos;s invisible recovery system works
-								seamlessly in the background without requiring any action from
-								you.
+								Invisible Wallet Recovery is an automatic system that ensures
+								your wallet remains accessible even if you lose access to your
+								device or account. Unlike traditional wallets that require seed
+								phrases or private keys, Mux&apos;s invisible recovery system
+								works seamlessly in the background without requiring any action
+								from you.
 							</p>
 						</div>
 						<RecoveryDocsLink />

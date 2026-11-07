@@ -190,12 +190,12 @@ export default function WalletPage() {
 										</svg>
 										Send
 									</Button>
-										<Button
-											variant="outline"
-											onClick={openReceive}
-											disabled={!canReceive}
-											title={
-												canReceive
+									<Button
+										variant="outline"
+										onClick={openReceive}
+										disabled={!canReceive}
+										title={
+											canReceive
 												? "Show receive QR stub"
 												: "Wallet address is invalid"
 										}

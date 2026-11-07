@@ -1,43 +1,68 @@
 "use client";
-import React from "react";
+import { useEffect, useState } from "react";
 
 export default function RequestsToday() {
-	const [count, setCount] = React.useState<number | null>(null);
-	const [loading, setLoading] = React.useState(true);
-	const [error, setError] = React.useState<string | null>(null);
+	const [count, setCount] = useState<number | null>(null);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(false);
+	const [reloadKey, setReloadKey] = useState(0);
 
-	React.useEffect(() => {
-		let mounted = true;
+	useEffect(() => {
+		const controller = new AbortController();
 		setLoading(true);
-		fetch("/api/requests/today")
+		setError(false);
+		fetch("/api/requests/today", { signal: controller.signal })
 			.then((res) => {
 				if (!res.ok) throw new Error(`Request failed: ${res.status}`);
 				return res.json();
 			})
 			.then((data) => {
-				if (!mounted) return;
-				if (typeof data?.count === "number") setCount(data.count);
-				else setError("invalid response");
+				if (Number.isSafeInteger(data?.count) && data.count >= 0) {
+					setCount(data.count);
+				} else {
+					throw new Error("Invalid response");
+				}
 			})
-			.catch((err) => {
-				if (!mounted) return;
-				setError(err?.message || "fetch error");
+			.catch(() => {
+				if (!controller.signal.aborted) setError(true);
 			})
 			.finally(() => {
-				if (!mounted) return;
-				setLoading(false);
+				if (!controller.signal.aborted) setLoading(false);
 			});
 		return () => {
-			mounted = false;
+			controller.abort();
 		};
-	}, []);
+	}, [reloadKey]);
 
-	if (loading) return <div>Loading API requests today…</div>;
-	if (error) return <div>Error loading requests: {error}</div>;
+	if (loading) {
+		return (
+			<div role="status" aria-live="polite" className="rounded-md border p-4 text-sm text-zinc-500">
+				Loading API requests today...
+			</div>
+		);
+	}
+	if (error) {
+		return (
+			<div role="alert" className="rounded-md border border-red-200 bg-red-50 p-4">
+				<p className="text-sm text-red-800">Unable to load API requests today.</p>
+				<button
+					type="button"
+					onClick={() => setReloadKey((key) => key + 1)}
+					className="mt-3 text-sm font-medium text-red-800 underline underline-offset-2"
+				>
+					Try again
+				</button>
+			</div>
+		);
+	}
 	return (
-		<div className="rounded-lg border p-4">
-			<h3 className="text-sm text-zinc-500">API requests today</h3>
-			<p className="mt-1 text-2xl font-semibold">{count ?? "—"}</p>
-		</div>
+		<section aria-labelledby="requests-today-title" className="rounded-md border bg-white p-4">
+			<h2 id="requests-today-title" className="text-sm text-zinc-500">
+				API requests today
+			</h2>
+			<p className="mt-1 text-2xl font-semibold tabular-nums">
+				{new Intl.NumberFormat().format(count ?? 0)}
+			</p>
+		</section>
 	);
 }

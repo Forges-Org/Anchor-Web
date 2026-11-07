@@ -7,5 +7,6 @@ export {
 	MetricsCardsSkeleton,
 	TopAssetsTableSkeleton,
 } from "./AnalyticsLoadingSkeleton";
+
 export { MetricsCards } from "./MetricsCards";
 export { TopAssetsTable } from "./TopAssetsTable";

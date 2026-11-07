@@ -74,7 +74,7 @@ This repo now includes a minimal auth flow and API client support for dev mode:
 
 ### Smoke tests
 
-Run full smoke tests with:
+Run full smokes tests with:
 
 ```bash
 npm test

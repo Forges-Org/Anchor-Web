@@ -48,6 +48,13 @@ export interface ChartDataPoint {
 	/** Raw numeric value used to compute bar height or line position. */
 	value: number;
 }
+// chart data point mock data
+export interface ChartDataPoint {
+	/** X-axis label, e.g. "Mon" or "2024-01-01". */
+	date: string;
+	/** Raw numeric value used to compute bar height or line position. */
+	value: number;
+}
 
 /**
  * A single row in the TopAssetsTable.

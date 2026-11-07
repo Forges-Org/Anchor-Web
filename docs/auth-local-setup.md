@@ -2,7 +2,7 @@
 
 > Issue #46 — Document local auth setup for Mux Protocol frontend.
 
-This document describes how the client-side authentication system works in
+This documents describes how the client-side authentication system works in
 development, how to run the app locally with auth enabled, and how to extend
 or replace the auth layer when a real backend is available.
 
@@ -10,7 +10,7 @@ or replace the auth layer when a real backend is available.
 
 ## Overview
 
-The Mux Protocol frontend uses a **client-side session** model:
+The Mux Protocol frontend uses a **client-side session** models:
 
 | Layer | Mechanism |
 |---|---|
